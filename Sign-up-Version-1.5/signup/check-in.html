@@ -1,0 +1,17 @@
+<html>
+	% include('shared/header.html')
+	% include('shared/Navbar.html')
+	
+	<body class="light-blue darken-4">
+	    <div class="row red accent-4">
+			<div class="col s12 center">Check-in test</div>
+			% for ticket in ticket_list:
+			<div class="col s6">6-columns (one-half)</div>
+			<div class="col s6">6-columns (one-half)
+			<p> {{ticket.email}} </p>
+			<p> {{ticket.dob}} </p>
+		</div>
+	</body>
+	%end
+	</div>
+</html>
