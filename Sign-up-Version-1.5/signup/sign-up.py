@@ -46,6 +46,7 @@ def index():
 @view('check-in')
 def check_in():
     data = dict (ticket_list = tickets)
+    return data
 
 
 
