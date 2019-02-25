@@ -48,6 +48,17 @@ def check_in():
     data = dict (ticket_list = tickets)
     return data
 
+@route('/check-in-success/<ticket_id>')
+@view('check-in-success')
+def check_in_success(ticket_id):
+    ticket_id = int(ticket_id)
+    found_ticket = None
+    for ticket in tickets:
+        if ticket.id == ticket_id:
+            found_ticket = ticket
+    data = dict (ticket = found_ticket)
+    found_ticket.check_in = True
+    return data
 
 
 run(host='0.0.0.0', port = 8080, reloader=True, debug=True)
