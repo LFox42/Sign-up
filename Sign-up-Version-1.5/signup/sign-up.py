@@ -60,5 +60,10 @@ def check_in_success(ticket_id):
     found_ticket.check_in = True
     return data
 
+@route('/sell-ticket')
+@view('sell-ticket')
+def sell_ticket():
+    data = dict (ticket_list = tickets)
+    return data
 
 run(host='0.0.0.0', port = 8080, reloader=True, debug=True)
