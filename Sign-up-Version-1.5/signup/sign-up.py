@@ -1,0 +1,69 @@
+
+
+#Build log for Sign up web page
+#Ver 1.1 - Created TEST data for Ticket variable
+#Ver 1.2 - Adding server functionality to python
+
+
+from bottle import run, route, view, get, post, request
+from itertools import count
+
+###Class START WITH CAPITAL LETTERS
+
+class Ticket:
+    
+    # _ signifies a private variable. not to be used outside of this class.
+    _ids = count (0)
+    
+    def __init__(self, name, email, date_of_birth, check_in): 
+        #not passing ID as we want it to create it.
+        self.id = next(self._ids)
+        self.name = name
+        self.email = email
+        self.dob = date_of_birth
+        self.check_in = check_in
+
+
+#Test Data
+tickets = [
+    Ticket("Matt Evans", "mevans@stc.school.nz","27.01.1988", False),
+    Ticket("Superman", "superman@stc.school.nz", "15.12.1978", False),
+    Ticket("Batman", "batman@stc.school.nz", "23.07.1989",False),
+    Ticket("Hulk", "hulk@stc.school.nz", "26.06.2003",False)
+    ]
+
+#Pages
+
+#index page
+@route('/')
+@view ('index')
+def index():
+    #need this function to attach the decorators above.
+    pass
+
+
+@route('/check-in')
+@view('check-in')
+def check_in():
+    data = dict (ticket_list = tickets)
+    return data
+
+@route('/check-in-success/<ticket_id>')
+@view('check-in-success')
+def check_in_success(ticket_id):
+    ticket_id = int(ticket_id)
+    found_ticket = None
+    for ticket in tickets:
+        if ticket.id == ticket_id:
+            found_ticket = ticket
+    data = dict (ticket = found_ticket)
+    found_ticket.check_in = True
+    return data
+
+@route('/sell-ticket')
+@view('sell-ticket')
+def sell_ticket():
+    data = dict (ticket_list = tickets)
+    return data
+
+run(host='0.0.0.0', port = 8080, reloader=True, debug=True)
