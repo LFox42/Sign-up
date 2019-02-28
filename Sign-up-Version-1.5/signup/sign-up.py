@@ -63,7 +63,6 @@ def check_in_success(ticket_id):
 @route('/sell-ticket')
 @view('sell-ticket')
 def sell_ticket():
-    data = dict (ticket_list = tickets)
-    return data
+    pass
 
 run(host='0.0.0.0', port = 8080, reloader=True, debug=True)
